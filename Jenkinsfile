@@ -6,32 +6,32 @@ pipeline {
 
         stage('Check Docker') {
             steps {
-                bat 'docker --version'
-                bat 'docker compose version'
+                sh 'docker --version'
+                sh 'docker compose version'
             }
         }
 
         stage('Stop Existing Containers') {
             steps {
-                bat 'docker compose down'
+                sh 'docker compose down || true'
             }
         }
 
         stage('Build Containers') {
             steps {
-                bat 'docker compose build'
+                sh 'docker compose build'
             }
         }
 
         stage('Run Containers') {
             steps {
-                bat 'docker compose up -d'
+                sh 'docker compose up -d'
             }
         }
 
         stage('Check Running Containers') {
             steps {
-                bat 'docker ps'
+                sh 'docker ps'
             }
         }
     }
